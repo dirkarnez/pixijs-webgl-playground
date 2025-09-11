@@ -1,0 +1,144 @@
+<!-- Licensed under a BSD license. See license.html for license -->
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+</head>
+<body>
+<script type="module">
+	import { Application, Assets, Container, Sprite, Graphics } from "https://cdnjs.cloudflare.com/ajax/libs/pixi.js/8.13.2/pixi.min.mjs"
+
+
+  class Slider extends Container {
+      constructor(options = {}) {
+          super();
+          this.dragging = false;
+          this.options = {
+              x: options.x ?? 0,
+              y: options.y ?? 0,
+              width: options.width ?? 200,
+              height: options.height ?? 8,
+              min: options.min ?? 0,
+              max: options.max ?? 100,
+              value: options.value ?? 0,
+              onChange: options.onChange ?? (() => { }),
+              barColor: options.barColor ?? 0xCCCCCC,
+              knobColor: options.knobColor ?? 0x333333,
+          };
+          this.x = this.options.x;
+          this.y = this.options.y;
+          this.bar = new Graphics();
+          this.knob = new Graphics();
+          this.addChild(this.bar);
+          this.addChild(this.knob);
+          this.interactive = true;
+          this.draw();
+          this.updateKnobPosition();
+          this.knob.interactive = true;
+          this.knob.buttonMode = true;
+          this.knob.on('pointerdown', this.onDragStart, this);
+          this.on('pointerup', this.onDragEnd, this);
+          this.on('pointerupoutside', this.onDragEnd, this);
+          this.on('pointermove', this.onDragMove, this);
+          this.bar.interactive = true;
+          this.bar.on('pointerdown', this.onBarPointerDown, this);
+      }
+      draw() {
+          this.bar.clear();
+          this.bar.beginFill(this.options.barColor);
+          this.bar.drawRoundedRect(0, (this.options.height / 2) - 2, this.options.width, 4, 2);
+          this.bar.endFill();
+          this.knob.clear();
+          this.knob.beginFill(this.options.knobColor);
+          this.knob.drawCircle(0, 0, this.options.height * 1.5);
+          this.knob.endFill();
+      }
+      get percent() {
+          return (this.options.value - this.options.min) / (this.options.max - this.options.min);
+      }
+      set percent(v) {
+          v = Math.max(0, Math.min(1, v));
+          this.options.value = this.options.min + v * (this.options.max - this.options.min);
+          this.updateKnobPosition();
+          this.options.onChange(this.value);
+      }
+      updateKnobPosition() {
+          this.knob.x = this.percent * this.options.width;
+          this.knob.y = this.options.height / 2;
+      }
+      onBarPointerDown(e) {
+          const local = e.data.getLocalPosition(this.bar);
+          let percent = local.x / this.options.width;
+          this.percent = percent;
+      }
+      onDragStart(e) {
+          this.dragging = true;
+          this.knob.alpha = 0.7;
+      }
+      onDragEnd() {
+          this.dragging = false;
+          this.knob.alpha = 1.0;
+      }
+      onDragMove(e) {
+          if (!this.dragging)
+              return;
+          const local = e.data.getLocalPosition(this.bar);
+          let percent = local.x / this.options.width;
+          this.percent = percent;
+      }
+      set value(val) {
+          val = Math.max(this.options.min, Math.min(this.options.max, val));
+          this.options.value = val;
+          this.updateKnobPosition();
+          this.options.onChange(this.value);
+      }
+      get value() {
+          return this.options.value;
+      }
+  };
+ (async () => {
+  // Create a new application
+  const app = new Application();
+
+  // Initialize the application
+  await app.init({ background: '#1099bb', resizeTo: window });
+
+  // Append the application canvas to the document body
+  document.body.appendChild(app.canvas);
+
+  // Create and add a container to the stage
+  const container = new Slider();
+
+  app.stage.addChild(container);
+
+  // // Load the bunny texture
+  // const texture = await Assets.load('https://pixijs.com/assets/bunny.png');
+
+  // // Create a 5x5 grid of bunnies in the container
+  // for (let i = 0; i < 25; i++) {
+  //   const bunny = new Sprite(texture);
+
+  //   bunny.x = (i % 5) * 40;
+  //   bunny.y = Math.floor(i / 5) * 40;
+  //   container.addChild(bunny);
+  // }
+
+  // // Move the container to the center
+  container.x = app.screen.width / 2;
+  container.y = app.screen.height / 2;
+
+  // // Center the bunny sprites in local container coordinates
+  // container.pivot.x = container.width / 2;
+  // container.pivot.y = container.height / 2;
+
+  // Listen for animate update
+  app.ticker.add((time) => {
+    // Continuously rotate the container!
+    // * use delta to create frame-independent transform *
+    //container.rotation -= 0.01 * time.deltaTime;
+  });
+})();
+</script>
+</body>
+</html>
