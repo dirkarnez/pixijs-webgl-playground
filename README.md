@@ -2,6 +2,9 @@
 ==============================================================================
 [pixijs/pixijs: The HTML5 Creation Engine: Create beautiful digital content with the fastest, most flexible 2D WebGL renderer.](https://github.com/pixijs/pixijs)
 
+### Notes
+- By using [pixijs/layout](https://github.com/pixijs/layout), we have extra `layout: true` parameter in `Sprite` (`const bunny = new Sprite({ texture, layout: true });`) so we do no need to hard-code x-y position
+
 ### TODOs
 - [ ] canvas fix
   - [dirkarnez/responsive-canvas](https://github.com/dirkarnez/responsive-canvas)
