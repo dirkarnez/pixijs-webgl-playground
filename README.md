@@ -5,6 +5,8 @@
 ### TODOs
 - [ ] canvas fix
   - [dirkarnez/responsive-canvas](https://github.com/dirkarnez/responsive-canvas)
+- [ ] layout
+  - [Quick Start | PixiJS Layout](https://layout.pixijs.io/docs/guides/guide/quick-start/)
 
 ### Playground
 - [Playground | PixiJS](https://pixijs.com/8.x/playground)
