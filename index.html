@@ -138,7 +138,14 @@ class Slider extends Container {
 
 (async () => {
     const app = new Application();
-    await app.init({ background: '#1099bb', resizeTo: window });
+    await app.init({
+      antialias: true, // Enable antialiasing
+      resolution: window.devicePixelRatio, // Screen resolution
+      preference: 'webgl', // 'webgl' or 'webgpu'
+      background: '#1099bb', 
+      resizeTo: window 
+    });
+  
     document.body.appendChild(app.canvas);
 
     /*
