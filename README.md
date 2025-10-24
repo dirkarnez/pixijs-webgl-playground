@@ -9,6 +9,9 @@
 ### Notes
 - By using [pixijs/layout](https://github.com/pixijs/layout), we have extra `layout: true` parameter in `Sprite` (`const bunny = new Sprite({ texture, layout: true });`) so we do no need to hard-code x-y position
 
+### Tutorials
+- [iT 邦幫忙::一起幫忙解決難題，拯救 IT 人的一天](https://ithelp.ithome.com.tw/users/20106532/articles)
+
 ### TODOs
 - [ ] Prebuilt [Lusito/typed-signals](https://github.com/Lusito/typed-signals) ESM ([it only provides CommonJS](https://github.com/Lusito/typed-signals/blob/master/tsconfig.json))
   - currently using CDN
