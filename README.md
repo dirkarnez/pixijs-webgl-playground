@@ -10,8 +10,9 @@
 - By using [pixijs/layout](https://github.com/pixijs/layout), we have extra `layout: true` parameter in `Sprite` (`const bunny = new Sprite({ texture, layout: true });`) so we do no need to hard-code x-y position
 
 ### TODOs
-- [ ] Prebuilt typed-signals ESM
+- [ ] Prebuilt [Lusito/typed-signals](https://github.com/Lusito/typed-signals) ESM ([it only provides CommonJS](https://github.com/Lusito/typed-signals/blob/master/tsconfig.json))
   - currently using CDN
+  - reference build: [miltoncandelero/tweedle.js: my personal fork of tween.js Work in progress](https://github.com/miltoncandelero/tweedle.js)
 - [ ] canvas fix
   - [dirkarnez/responsive-canvas](https://github.com/dirkarnez/responsive-canvas)
 - [ ] layout
