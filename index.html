@@ -143,7 +143,8 @@ class Slider extends Container {
       resolution: window.devicePixelRatio, // Screen resolution
       preference: 'webgl', // 'webgl' or 'webgpu'
       background: '#1099bb', 
-      resizeTo: window 
+      resizeTo: window,
+      autoResize: true
     });
   
     document.body.appendChild(app.canvas);
