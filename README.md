@@ -10,6 +10,8 @@
 - By using [pixijs/layout](https://github.com/pixijs/layout), we have extra `layout: true` parameter in `Sprite` (`const bunny = new Sprite({ texture, layout: true });`) so we do no need to hard-code x-y position
 
 ### TODOs
+- [ ] Prebuilt typed-signals ESM
+  - currently using CDN
 - [ ] canvas fix
   - [dirkarnez/responsive-canvas](https://github.com/dirkarnez/responsive-canvas)
 - [ ] layout

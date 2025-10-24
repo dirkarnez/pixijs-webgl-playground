@@ -9,7 +9,10 @@
         "imports": {
             "yoga-layout/load": "./pixijs-layout-prebuilt-v3.1.0-node-v22.x/yoga-layout-dist/src/load.js",
             "@pixi/layout": "./pixijs-layout-prebuilt-v3.1.0-node-v22.x/index.mjs",
-            "pixi.js": "./pixijs-layout-prebuilt-v3.1.0-node-v22.x/pixi.js-dist/pixi.min.mjs"
+            "@pixi/ui": "./pixijs-ui-prebuilt-v2.2.7-node-v22.x/pixi-ui.mjs",
+            "pixi.js": "./pixijs-layout-prebuilt-v3.1.0-node-v22.x/pixi.js-dist/pixi.min.mjs",
+            "tweedle.js": "./pixijs-ui-prebuilt-v2.2.7-node-v22.x/tweedle.js-dist/tweedle.es.min.js",
+            "typed-signals": "https://cdn.jsdelivr.net/npm/typed-signals@3.0.0/+esm"
         }
     }
 </script>
@@ -17,8 +20,10 @@
 <body>
 
 <script type="module">
-import { Application, Container, Graphics, Assets, Sprite } from "pixi.js";
-import "@pixi/layout";
+    import { Signal } from "typed-signals";
+    import { Button } from "@pixi/ui";
+    import { Application, Container, Graphics, Assets, Sprite } from "pixi.js";
+    import "@pixi/layout";
 
 class Slider extends Container {
     constructor(options = {}) {
@@ -215,6 +220,16 @@ class Slider extends Container {
         // Add the bunny to the container
         container.addChild(bunny);
     }
+
+    const button = new Button(
+            new Graphics()
+                .rect(0, 0, 100, 50, 15)
+                .fill(0xFFFFFF)
+    );
+
+    button.onPress.connect(() => console.log('onPress'));
+    
+    container.addChild(button.view);
 })();
 </script>
 </body>
