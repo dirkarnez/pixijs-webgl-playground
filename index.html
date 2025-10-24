@@ -21,7 +21,7 @@
 
 <script type="module">
     import { Signal } from "typed-signals";
-    import { Button } from "@pixi/ui";
+    import { FancyButton } from "@pixi/ui";
     import { Application, Container, Graphics, Assets, Sprite } from "pixi.js";
     import "@pixi/layout";
 
@@ -221,13 +221,45 @@ class Slider extends Container {
         container.addChild(bunny);
     }
 
-    const button = new Button(
-            new Graphics()
-                .rect(0, 0, 100, 50, 15)
-                .fill(0xFFFFFF)
-    );
 
-    button.onPress.connect(() => console.log('onPress'));
+
+  
+    const button = new FancyButton({
+       defaultView: new Graphics()
+              .rect(0, 0, 100, 50, 15)
+              .fill(0x222222),
+       hoverView: new Graphics()
+              .rect(0, 0, 100, 50, 15)
+              .fill(0xaaaaaa),
+       pressedView: new Graphics()
+              .rect(0, 0, 100, 50, 15)
+              .fill(0xFFFFFF),
+       text: 'Click me!',
+       animations: {
+            hover: {
+                props: {
+                    scale: {
+                        x: 1.1,
+                        y: 1.1,
+                    }
+                },
+                duration: 100,
+            },
+            pressed: {
+                props: {
+                    scale: {
+                        x: 0.9,
+                        y: 0.9,
+                    }
+                },
+                duration: 100,
+            }
+        }
+    });
+    
+    button.onPress.connect(() => {
+      button.text = 'Button pressed!';
+    });
     
     container.addChild(button.view);
 })();
